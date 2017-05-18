@@ -1,0 +1,81 @@
+{
+  "name": "react-boilerplate",
+  "version": "0.1.0",
+  "description": "React Boilerplate",
+  "scripts": {
+    "lint": "eslint --config=.eslintrc ./src/components/**/*.jsx ./src/**/*.js ./src/*.js --fix",
+    "build": "npm-run-all --parallel webpack-client-build webpack-server-build",
+    "webpack-server-build": "NODE_ENV='development' webpack --config ./webpack/webpack.server.config.js --progress --colors --watch",
+    "webpack-client-build": "NODE_ENV='development' webpack --config ./webpack/webpack.browser.config.js --progress --colors --watch",
+    "serve": "npm run build && pm2 stop all && pm2 start ./dist/main.js --watch",
+    "build-prod": "npm-run-all webpack-client-build-prod webpack-server-build-prod",
+    "webpack-server-build-prod": "webpack --config ./webpack/webpack.server.config.js -p",
+    "webpack-client-build-prod": "webpack --config ./webpack/webpack.browser.config.js -p",
+    "test": "jest",
+    "test-update": "jest -u",
+    "test-coverage": "jest --coverage --verbose",
+    "test-dev": "jest --watch"
+  },
+  "author": "Ateev",
+  "dependencies": {
+    "compression": "1.6.2",
+    "express": "4.15.2",
+    "react": "15.5.4",
+    "react-dom": "15.5.4",
+    "react-helmet": "5.0.3",
+    "react-redux": "5.0.4",
+    "react-router": "4.1.1",
+    "react-router-redux": "4.0.8",
+    "redux": "3.6.0",
+    "superagent": "3.5.2",
+    "webpack": "2.5.1"
+  },
+  "devDependencies": {
+    "babel-loader": "7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "clean-webpack-plugin": "0.1.15",
+    "css-loader": "0.28.0",
+    "enzyme": "2.8.2",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "15.0.1",
+    "eslint-loader": "1.7.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-react": "7.0.1",
+    "extract-text-webpack-plugin": "2.1.0",
+    "file-loader": "0.10.0",
+    "jest": "20.0.3",
+    "jest-cli": "20.0.3",
+    "jest-serializer-enzyme": "1.0.0",
+    "node-sass": "4.5.3",
+    "npm-run-all": "4.0.2",
+    "null-loader": "0.1.1",
+    "react-addons-test-utils": "15.5.1",
+    "sass-loader": "6.0.5",
+    "style-loader": "0.17.0",
+    "uglify-js": "3.0.7",
+    "uglifyjs-webpack-plugin": "0.4.3",
+    "url-loader": "0.5.8",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "<rootDir>/src/mocks/styleMock.js",
+      "^.+\\.(gif|ttf|eot|svg|png)$": "<rootDir>/src/mocks/fileMock.js",
+      "config.js": "<rootDir>/config/config.js.sample"
+    },
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-enzyme"
+    ],
+    "collectCoverageFrom": [
+      "src/components/**/*.jsx",
+      "src/**/*.js",
+      "src/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "src/mocks",
+      "src/vendors",
+      "src/static"
+    ]
+  }
+}

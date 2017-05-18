@@ -1,0 +1,13 @@
+{
+    "apps": [{
+        "exec_mode": "cluster_mode",
+        "instances": 2,
+        "script": "/home/ubuntu/www/project-name/current/dist/main.js",
+        "name": "project-name-prod",
+        "env": {
+            "PORT": 8182,
+            "NODE_ENV": "production",
+            "MONITORING": true,
+        },
+    }]
+}
