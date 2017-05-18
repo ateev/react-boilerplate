@@ -3,3 +3,4 @@ src/stats.json
 coverage
 node_modules
 yarn-error.log
+build
