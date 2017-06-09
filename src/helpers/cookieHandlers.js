@@ -8,7 +8,9 @@ export function readBrowserCookie(cookieName) {
   const a = RegExp(`^\\s*${cookieName}=\\s*(.*?)\\s*$`);
   for (let b = 0; b < e.length; b += 1) {
     const f = e[b].match(a);
-    f && d.push(f[1]);
+    if (f) {
+      d.push(f[1]);
+    }
   }
   return d;
 }

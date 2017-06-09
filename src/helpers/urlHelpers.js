@@ -1,17 +1,14 @@
 export function getBaseUrl(host) {
+  let currentHostName;
   if (typeof window !== 'undefined' && window.location.hostname.indexOf('www') !== -1) {
-    const currentHostName = window.location.hostname;
-    const fabUrl = `https://${currentHostName}`;
-    return {
-      fabUrl,
-    };
+    currentHostName = window.location.hostname;
   } else if (host !== undefined && host.indexOf('localhost') === -1) {
-    const currentHostName = (host.match(/:/g)) ? host.slice(0, host.indexOf(':')) : host;
-    const fabUrl = `https://${currentHostName}`;
-    return {
-      fabUrl,
-    };
+    currentHostName = (host.match(/:/g)) ? host.slice(0, host.indexOf(':')) : host;
   }
+  const baseUrl = `https://${currentHostName}`;
+  return {
+    baseUrl,
+  };
 }
 
 export function getCurrentUrl() {

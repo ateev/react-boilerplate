@@ -1,5 +1,5 @@
-import config from '../config/config.js';
-import { readBrowserCookie } from './helpers/cookieHandlers.js';
+import config from '../config/config';
+import { readBrowserCookie } from './helpers/cookieHandlers';
 
 let mixpanel = {
   track_links() { },

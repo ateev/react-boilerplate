@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
-import { match, RouterContext } from 'react-router';
+import { StaticRouter as Router } from 'react-router';
 import { Provider } from 'react-redux';
-import ga from '../vendors/ga.js';
-import { createNewStore } from '../store/mainStore.js';
-import config from '../../config/config.js';
+import ga from '../vendors/ga';
+import { createNewStore } from '../store/mainStore';
+import config from '../../config/config';
 import stats from '../stats.json';
-import routes from '../routes.jsx';
-import asyncSrc from './async-scripts.js';
-import addMultipleOnLoad from './multiple-on-load.js';
+import asyncSrc from './async-scripts';
+import addMultipleOnLoad from './multiple-on-load';
 
 const gaScript = ga.replace('{trackingId}', config.gaId);
 let mixpanelScript = '';
@@ -32,18 +31,14 @@ if (typeof stats.vendors === 'string') {
 }
 vendorsSrc = vendorsSrc[vendorsSrc.length - 1];
 
-export function renderHomePage(req) {
+export default function renderHomePage(req) {
   const mainStore = createNewStore();
-  let app;
-  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    if (renderProps) {
-      app = (
-        <Provider store={mainStore} >
-          <RouterContext {...renderProps} />
-        </Provider>
-      );
-    }
-  });
+  const context = {};
+  const app = (
+    <Provider store={mainStore} >
+      <Router location={req.url} context={context} />
+    </Provider>
+  );
 
   let noIndexTag = '';
   if (process.env.NODE_ENV !== 'production') {
@@ -56,30 +51,29 @@ export function renderHomePage(req) {
 
 
   return `
-		<html lang="en-us">
-			<head>
+    <html lang="en-us">
+      <head>
         <meta charset="utf-8">
         ${head.title}
         ${head.meta}
         <link rel="manifest" href="/manifest/manifest.json" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="stylesheet" type="text/css" href="/css/bootstrap-custom.min.css" />
-				<link rel="stylesheet" type="text/css" href="/css/${cssSrc}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="/css/${cssSrc}"/>
         ${noIndexTag}
         ${mixpanelScript}
-			</head>
-			<body>
+      </head>
+      <body>
         <div id="bodyOverlay"></div>
-				<div id="mainContainer">
+        <div id="mainContainer">
           <div>
             ${appString}
           </div>
         </div>
-				<script>
-					window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
-				</script>
+        <script>
+          window.INITIAL_STATE = ${JSON.stringify(initialState)}
+        </script>
         <script type="text/javascript" async-src="/js/${vendorsSrc}"></script>
         <script type="text/javascript" async-src="/js/${mainSrc}"></script>
         <script async src='//www.google-analytics.com/analytics.js'></script>
@@ -100,7 +94,7 @@ export function renderHomePage(req) {
           }
           addLoadEvent(addGa);
         </script>
-			</body>
-		</html>
-	`;
+      </body>
+    </html>
+  `;
 }

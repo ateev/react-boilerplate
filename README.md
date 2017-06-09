@@ -1,1 +1,1 @@
-### Welcome to Another React Boilerplate.
+### Welcome to just another React Boilerplate.

@@ -7,7 +7,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const config = {
   name: 'client',
   entry: {
-    home: ['./src/components/main-container/main-container.jsx'],
+    home: ['./src/components/main-container/main-container.js'],
     vendors: [
       'react',
       'react-dom',
@@ -93,10 +93,11 @@ const config = {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('production'),
       },
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
+    new webpack.optimize.UglifyJsPlugin({ 
+      output: { comments: false },
+      compress: { warnings: false },
+      sourceMap: true,
     }),
-    new webpack.optimize.UglifyJsPlugin({ output: { comments: false } }),
   ],
 };
 

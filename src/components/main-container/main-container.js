@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import routes from '../../routes.jsx';
-import { createNewStore } from '../../store/mainStore.js';
-import track from '../../track.js';
-import { getCurrentUrl } from '../../helpers/urlHelpers.js';
+import { Router } from 'react-router';
+import createHistory from 'history/createBrowserHistory'
+import { ConnectedRouter } from 'react-router-redux'
+import routes from '../../routes';
+import { createNewStore } from '../../store/mainStore';
+import track from '../../track';
+import { getCurrentUrl } from '../../helpers/urlHelpers';
 import './main-container.scss';
 
 export default class MainContainer extends React.Component {
   constructor() {
     super();
-    this.myStore = createNewStore(window.__INITIAL_STATE__);
+    this.myStore = createNewStore(window.INITIAL_STATE);
     this.state = this.myStore.getState();
   }
 
@@ -23,14 +24,13 @@ export default class MainContainer extends React.Component {
   }
 
   render() {
-    const history = browserHistory;
-    syncHistoryWithStore(history, this.myStore);
+    const history = createHistory();
     return (
       <div>
         <Provider store={this.myStore}>
-          <Router history={history}>
+          <ConnectedRouter history={history}>
             { routes }
-          </Router>
+          </ConnectedRouter>
         </Provider>
       </div>
     );

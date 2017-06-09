@@ -1,10 +1,10 @@
-import { routerReducer as routing } from 'react-router-redux';
+import { routerReducer } from 'react-router-redux';
 import { createStore, combineReducers } from 'redux';
-import messages from '../reducers/messageReducer.js';
+import messages from '../reducers/messageReducer';
 
 export const finalReducer = combineReducers({
   messages,
-  routing,
+  router: routerReducer,
 });
 
 export const createNewStore = (initialState) => {
@@ -12,7 +12,7 @@ export const createNewStore = (initialState) => {
     return createStore(
       finalReducer,
       initialState,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+      window.REDUX_DEVTOOLS_EXTENSION && window.REDUX_DEVTOOLS_EXTENSION(),
     );
   }
   return createStore(finalReducer, initialState);

@@ -1,5 +1,5 @@
-import mixpanel from './mixpanel.js';
-import trackPageView from './helpers/trackPageView.js';
+import mixpanel from './mixpanel';
+import trackPageView from './helpers/trackPageView';
 
 // Change this
 const track = {
