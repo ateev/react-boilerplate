@@ -93,7 +93,7 @@ const config = {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('production'),
       },
     }),
-    new webpack.optimize.UglifyJsPlugin({ 
+    new UglifyJSPlugin({
       output: { comments: false },
       compress: { warnings: false },
       sourceMap: true,
