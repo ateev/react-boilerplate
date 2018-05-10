@@ -5,15 +5,16 @@
   "scripts": {
     "lint": "eslint --config=.eslintrc ./src/components/**/*.jsx ./src/**/*.js ./src/*.js --fix",
     "build": "npm-run-all --parallel webpack-client-build webpack-server-build",
-    "webpack-server-build": "NODE_ENV='development' webpack --config ./webpack/webpack.server.config.js --progress --colors --watch",
+    "webpack-server-build": "NODE_ENV='development' webpack --config ./webpack/webpack.server.config.js",
     "webpack-client-build": "NODE_ENV='development' webpack --config ./webpack/webpack.browser.config.js --progress --colors --watch",
     "build-prod": "npm-run-all webpack-client-build-prod webpack-server-build-prod",
-    "webpack-server-build-prod": "webpack --config ./webpack/webpack.server.config.js -p",
-    "webpack-client-build-prod": "webpack --config ./webpack/webpack.browser.config.js -p",
+    "webpack-server-build-prod": "NODE_ENV='production' webpack --config ./webpack/webpack.server.config.js -p",
+    "webpack-client-build-prod": "NODE_ENV='production' webpack --config ./webpack/webpack.browser.config.js -p",
     "test": "jest",
     "test-update": "jest -u",
     "test-coverage": "jest --coverage --verbose",
-    "test-dev": "jest --watch"
+    "test-dev": "jest --watch",
+    "start": "NODE_ENV=development node dist/main.js"
   },
   "author": "Ateev",
   "dependencies": {
@@ -60,7 +61,9 @@
     "uglify-js": "3.0.25",
     "uglifyjs-webpack-plugin": "0.4.6",
     "url-loader": "0.5.8",
-    "webpack-dev-server": "2.4.5"
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-dev-server": "2.4.5",
+    "webpack-hot-middleware": "^2.22.1"
   },
   "jest": {
     "moduleNameMapper": {
