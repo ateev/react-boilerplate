@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import createHistory from 'history/createBrowserHistory'
-import { ConnectedRouter } from 'react-router-redux'
-import routes from '../../routes';
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'react-router-redux';
 import { createNewStore } from '../../store/mainStore';
-import track from '../../track';
 import { getCurrentUrl } from '../../helpers/urlHelpers';
+import routes from '../../routes';
+import track from '../../track';
 import './main-container.scss';
 
 export default class MainContainer extends React.Component {
