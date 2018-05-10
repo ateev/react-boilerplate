@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - type: bind
+        source: ./src
+        target: /app/src
+    ports:
+      - 8182:8182
+    environment:
+      - NODE_ENV=development
+volumes:
+  esdata1:
+    driver: local
