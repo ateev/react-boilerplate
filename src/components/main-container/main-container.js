@@ -41,3 +41,12 @@ if (typeof window !== 'undefined') {
     document.getElementById('mainContainer'),
   );
 }
+
+if (module.hot) {
+  module.hot.accept(() => {
+    ReactDOM.render(
+      <MainContainer />,
+      document.getElementById('mainContainer'),
+    );
+  });
+}

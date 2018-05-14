@@ -9,6 +9,9 @@
     "react/jsx-filename-extension": 0,
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "import/no-mutable-exports": 0,
-    "jsx-a11y/href-no-hash": 0
+    "jsx-a11y/href-no-hash": 0,
+    "function-paren-newline": 0,
+    "global-require": 0,
+    "import/no-extraneous-dependencies": 0
   }
 }
